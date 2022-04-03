@@ -5,6 +5,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.setGlobalPrefix('api');
+
   const swaggerConfig = new DocumentBuilder()
     .setTitle('ODS 10 API')
     .setVersion('1.0')
