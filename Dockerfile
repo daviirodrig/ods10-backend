@@ -8,4 +8,4 @@ RUN yarn install
 
 COPY . .
 
-ENTRYPOINT [ "yarn", "start" ]
+ENTRYPOINT [ "yarn", "start:dev" ]
