@@ -12,20 +12,24 @@ import { User } from './user.entity';
 import { Exclude } from 'class-transformer';
 import { Document } from './document.entity';
 import { Status } from '@shared/enums/status.enum';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('users_documents')
 export class UsersDocuments {
   @PrimaryGeneratedColumn('uuid')
+  @Exclude()
   id: string;
 
   @ManyToOne(() => User, { cascade: true })
   @JoinColumn()
   user: User;
 
+  @ApiProperty()
   @ManyToOne(() => Document, { cascade: true })
   @JoinColumn()
   document: Document;
 
+  @ApiProperty({ enum: Status })
   @Column({
     type: 'enum',
     enum: Status,
