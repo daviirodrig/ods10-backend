@@ -1,17 +1,17 @@
 import {
+  Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from './user.entity';
-import { Document } from './document.entity';
 import { Exclude } from 'class-transformer';
+import { Document } from './document.entity';
+import { Status } from '@shared/enums/status.enum';
 
 @Entity('users_documents')
 export class UsersDocuments {
@@ -19,12 +19,19 @@ export class UsersDocuments {
   id: string;
 
   @ManyToOne(() => User, { cascade: true })
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn()
   user: User;
 
-  @ManyToMany(() => Document, { cascade: true })
-  @JoinTable()
-  documents: Document[];
+  @ManyToOne(() => Document, { cascade: true })
+  @JoinColumn()
+  document: Document;
+
+  @Column({
+    type: 'enum',
+    enum: Status,
+    default: Status.missing,
+  })
+  status: Status;
 
   @CreateDateColumn({ name: 'created_at' })
   @Exclude()
