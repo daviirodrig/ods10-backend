@@ -1,30 +1,41 @@
 import {
+  Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { User } from './user.entity';
-import { Document } from './document.entity';
 import { Exclude } from 'class-transformer';
+import { Document } from './document.entity';
+import { Status } from '@shared/enums/status.enum';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('users_documents')
 export class UsersDocuments {
   @PrimaryGeneratedColumn('uuid')
+  @Exclude()
   id: string;
 
   @ManyToOne(() => User, { cascade: true })
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn()
   user: User;
 
-  @ManyToMany(() => Document, { cascade: true })
-  @JoinTable()
-  documents: Document[];
+  @ApiProperty()
+  @ManyToOne(() => Document, { cascade: true })
+  @JoinColumn()
+  document: Document;
+
+  @ApiProperty({ enum: Status })
+  @Column({
+    type: 'enum',
+    enum: Status,
+    default: Status.missing,
+  })
+  status: Status;
 
   @CreateDateColumn({ name: 'created_at' })
   @Exclude()
