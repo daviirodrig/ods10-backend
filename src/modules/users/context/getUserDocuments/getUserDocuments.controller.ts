@@ -6,7 +6,7 @@ import { GetUserDocumentsService } from './getUserDocuments.service';
 
 @ApiTags('Users')
 @Controller('users')
-export class GetDocumentsController {
+export class GetUserDocumentsController {
   constructor(private getUserDocumentsService: GetUserDocumentsService) {}
 
   @Get(':id/documents')
