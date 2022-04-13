@@ -18,10 +18,6 @@ export class GetUserDocumentsController {
   async getDocuments(@Param('id') userId: string) {
     const docs = await this.getUserDocumentsService.getDocuments(userId);
 
-    //const parsed = instanceToInstance(docs).map((i) => {
-    //  return { ...i.document, status: i.status };
-    //});
-
     return instanceToInstance(docs);
   }
 }
