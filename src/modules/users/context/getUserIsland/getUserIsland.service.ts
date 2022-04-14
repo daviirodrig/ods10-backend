@@ -29,6 +29,7 @@ export class GetUserIslandService {
         (userDoc) => userDoc.document.island.id === island.id,
       );
       return {
+        id: island.id,
         name: island.name,
         description: island.description,
         userDocument,
