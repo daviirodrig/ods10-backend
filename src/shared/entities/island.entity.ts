@@ -6,16 +6,16 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Island } from './island.entity';
+import { Document } from './document.entity';
 
-@Entity('documents')
-export class Document {
-  @ApiProperty()
+@Entity('islands')
+export class Island {
   @PrimaryGeneratedColumn('uuid')
+  @Exclude()
   id: string;
 
   @ApiProperty()
@@ -23,32 +23,13 @@ export class Document {
   name: string;
 
   @ApiProperty()
-  @Column({ type: 'text' })
+  @Column()
   description: string;
 
-  @ApiProperty()
-  @Column({ default: 0 })
-  price: number;
-
-  @ApiProperty()
-  @Column({ nullable: true })
-  link: string;
-
-  @ApiProperty()
-  @Column({ nullable: true })
-  location: string;
-
-  @ApiProperty()
-  @Column()
-  duration: string;
-
-  @ApiProperty()
-  @Column()
-  order: number;
-
-  @ManyToOne(() => Island, (island) => island.documents)
+  @ApiProperty({ type: [Document] })
+  @OneToMany(() => Document, (document) => document.island)
   @JoinColumn()
-  island: Island;
+  documents: Document[];
 
   @CreateDateColumn({ name: 'created_at' })
   @Exclude()
