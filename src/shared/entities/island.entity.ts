@@ -15,7 +15,6 @@ import { Document } from './document.entity';
 @Entity('islands')
 export class Island {
   @PrimaryGeneratedColumn('uuid')
-  @Exclude()
   id: string;
 
   @ApiProperty()

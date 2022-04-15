@@ -25,14 +25,14 @@ export class GetUserIslandService {
     );
 
     return islands.map((island) => {
-      const userDocument = userDocuments.find(
+      const userDocs = userDocuments.filter(
         (userDoc) => userDoc.document.island.id === island.id,
       );
       return {
         id: island.id,
         name: island.name,
         description: island.description,
-        userDocument,
+        documents: userDocs,
       };
     });
   }
