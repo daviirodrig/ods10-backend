@@ -1,5 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import { UserIdParamDto } from '@shared/dtos/userIdParam.dto';
 import { UsersDocuments } from '@shared/entities/usersDocuments.entity';
 import { instanceToInstance } from 'class-transformer';
 import { GetUserDocumentsService } from './getUserDocuments.service';
@@ -15,8 +16,12 @@ export class GetUserDocumentsController {
     isArray: true,
     type: UsersDocuments,
   })
-  async getDocuments(@Param('id') userId: string) {
-    const docs = await this.getUserDocumentsService.getDocuments(userId);
+  @ApiParam({
+    name: 'id',
+    type: 'string',
+  })
+  async getDocuments(@Param() params: UserIdParamDto) {
+    const docs = await this.getUserDocumentsService.getDocuments(params.id);
 
     return instanceToInstance(docs);
   }

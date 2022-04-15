@@ -1,5 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import { UserIdParamDto } from '@shared/dtos/userIdParam.dto';
 import { User } from '@shared/entities/user.entity';
 import { instanceToInstance } from 'class-transformer';
 import { GetUserService } from './getUser.service';
@@ -9,10 +10,15 @@ import { GetUserService } from './getUser.service';
 export class GetUserController {
   constructor(private getUserService: GetUserService) {}
 
+  // add api param swagger
   @Get(':id')
   @ApiOkResponse({ type: User })
-  getUser(@Param('id') userId: string) {
-    const user = this.getUserService.getUser(userId);
+  @ApiParam({
+    name: 'id',
+    type: 'string',
+  })
+  getUser(@Param() param: UserIdParamDto): Promise<User> {
+    const user = this.getUserService.getUser(param.id);
 
     return instanceToInstance(user);
   }

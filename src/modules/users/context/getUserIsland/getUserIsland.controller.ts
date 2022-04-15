@@ -1,5 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import { UserIdParamDto } from '@shared/dtos/userIdParam.dto';
 import { UserIslandResponseDTO } from '@shared/dtos/userIsland.dto';
 import { instanceToInstance } from 'class-transformer';
 import { GetUserIslandService } from './getUserIsland.service';
@@ -11,8 +12,12 @@ export class GetUserIslandController {
 
   @Get(':id/islands')
   @ApiOkResponse({ type: [UserIslandResponseDTO] })
-  getUserIsland(@Param('id') userId: string) {
-    const userIsland = this.getUserIslandService.getUserIsland(userId);
+  @ApiParam({
+    name: 'id',
+    type: 'string',
+  })
+  getUserIsland(@Param() params: UserIdParamDto) {
+    const userIsland = this.getUserIslandService.getUserIsland(params.id);
 
     return instanceToInstance(userIsland);
   }
