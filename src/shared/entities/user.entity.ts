@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 import {
+  Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
@@ -13,6 +14,18 @@ export class User {
   @ApiProperty()
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @ApiProperty()
+  @Column()
+  name: string;
+
+  @ApiProperty()
+  @Column()
+  email: string;
+
+  @ApiProperty()
+  @Column()
+  tel: string;
 
   @CreateDateColumn({ name: 'created_at' })
   @Exclude()

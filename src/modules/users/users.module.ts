@@ -3,6 +3,8 @@ import { IslandsModule } from '@modules/islands/islands.module';
 import { IslandRepository } from '@modules/islands/repository/island.repository';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GetUserController } from './context/getUser/getUser.controller';
+import { GetUserService } from './context/getUser/getUser.service';
 import { GetUserDocumentsController } from './context/getUserDocuments/getUserDocuments.controller';
 import { GetUserDocumentsService } from './context/getUserDocuments/getUserDocuments.service';
 import { GetUserIslandController } from './context/getUserIsland/getUserIsland.controller';
@@ -26,11 +28,13 @@ import { UserDocumentsRepository } from './repository/userDocuments.repository';
     GetUserDocumentsController,
     UpdateUserDocumentsController,
     GetUserIslandController,
+    GetUserController,
   ],
   providers: [
     GetUserDocumentsService,
     UpdateUserDocumentsService,
     GetUserIslandService,
+    GetUserService,
   ],
 })
 export class UsersModule {}
