@@ -24,7 +24,11 @@ export class Document {
 
   @ApiProperty()
   @Column({ type: 'text' })
-  description: string;
+  shortDescription: string;
+
+  @ApiProperty()
+  @Column({ type: 'text' })
+  fullDescription: string;
 
   @ApiProperty()
   @Column({ default: 0 })
@@ -39,12 +43,8 @@ export class Document {
   location: string;
 
   @ApiProperty()
-  @Column()
+  @Column({ nullable: true })
   duration: string;
-
-  @ApiProperty()
-  @Column()
-  order: number;
 
   @ManyToOne(() => Island, (island) => island.documents)
   @JoinColumn()
