@@ -12,7 +12,7 @@ export class GetUserDocumentsService {
   getDocuments(userId: string) {
     return this.userDocsRepo.find({
       where: { user: userId },
-      relations: ['document'],
+      relations: ['document', 'document.island'],
     });
   }
 }
