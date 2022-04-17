@@ -16,7 +16,9 @@ export class UpdateUserDocumentsService {
   ) {}
   async update(userId: string, body: UpdateUserDocumentsRequestBodyDTO) {
     const user = await this.userRepo.findOne(userId);
-    const savedDoc = await this.documentRepo.findOne(body.document);
+    const savedDoc = await this.documentRepo.findOne(body.document, {
+      relations: ['island'],
+    });
     const userDoc = await this.userDocRepo.findOne({
       where: { user, document: savedDoc },
     });
@@ -34,7 +36,7 @@ export class UpdateUserDocumentsService {
 
     const updated = await this.userDocRepo.findOne({
       where: { user: userId, document: body.document },
-      relations: ['document'],
+      relations: ['document', 'document.island'],
     });
 
     return updated;

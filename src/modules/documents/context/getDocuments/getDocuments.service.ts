@@ -9,7 +9,7 @@ export class GetDocumentsService {
   ) {}
 
   getDocuments() {
-    const allDocuments = this.docRepo.find();
+    const allDocuments = this.docRepo.find({ relations: ['island'] });
     return allDocuments;
   }
 }
