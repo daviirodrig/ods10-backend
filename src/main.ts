@@ -9,6 +9,8 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
+  app.enableCors();
+
   const swaggerConfig = new DocumentBuilder()
     .setTitle('ODS 10 API')
     .setVersion('1.0')
