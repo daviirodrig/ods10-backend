@@ -1,5 +1,10 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import {
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UserIdParamDto } from '@shared/dtos/userIdParam.dto';
 import { User } from '@shared/entities/user.entity';
 import { instanceToInstance } from 'class-transformer';
@@ -10,9 +15,9 @@ import { GetUserService } from './getUser.service';
 export class GetUserController {
   constructor(private getUserService: GetUserService) {}
 
-  // add api param swagger
   @Get(':id')
   @ApiOkResponse({ type: User })
+  @ApiNotFoundResponse({ description: 'User not found' })
   @ApiParam({
     name: 'id',
     type: 'string',

@@ -1,6 +1,6 @@
 import { IslandRepository } from '@modules/islands/repository/island.repository';
 import { UserDocumentsRepository } from '@modules/users/repository/userDocuments.repository';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { instanceToInstance } from 'class-transformer';
 
@@ -23,6 +23,10 @@ export class GetUserIslandService {
         relations: ['document', 'document.island'],
       }),
     );
+
+    if (typeof userDocuments !== undefined && userDocuments.length === 0) {
+      throw new NotFoundException(`User not found`);
+    }
 
     return islands.map((island) => {
       const userDocs = userDocuments.filter(

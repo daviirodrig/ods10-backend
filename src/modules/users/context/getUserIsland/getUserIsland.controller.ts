@@ -1,5 +1,10 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import {
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UserIdParamDto } from '@shared/dtos/userIdParam.dto';
 import { UserIslandResponseDTO } from '@shared/dtos/userIsland.dto';
 import { instanceToInstance } from 'class-transformer';
@@ -12,6 +17,7 @@ export class GetUserIslandController {
 
   @Get(':id/islands')
   @ApiOkResponse({ type: [UserIslandResponseDTO] })
+  @ApiNotFoundResponse({ description: 'User not found' })
   @ApiParam({
     name: 'id',
     type: 'string',

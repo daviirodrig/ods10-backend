@@ -1,5 +1,10 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
+import {
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 import { UserIdParamDto } from '@shared/dtos/userIdParam.dto';
 import { UsersDocuments } from '@shared/entities/usersDocuments.entity';
 import { instanceToInstance } from 'class-transformer';
@@ -16,6 +21,7 @@ export class GetUserDocumentsController {
     isArray: true,
     type: UsersDocuments,
   })
+  @ApiNotFoundResponse({ description: 'User not found' })
   @ApiParam({
     name: 'id',
     type: 'string',
