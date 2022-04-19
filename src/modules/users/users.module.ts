@@ -9,6 +9,8 @@ import { GetUserDocumentsController } from './context/getUserDocuments/getUserDo
 import { GetUserDocumentsService } from './context/getUserDocuments/getUserDocuments.service';
 import { GetUserIslandController } from './context/getUserIsland/getUserIsland.controller';
 import { GetUserIslandService } from './context/getUserIsland/getUserIsland.service';
+import { UpdateUserController } from './context/updateUser/updateUser.controller';
+import { UpdateUserService } from './context/updateUser/updateUser.service';
 import { UpdateUserDocumentsController } from './context/updateUserDocuments/updateUserDocuments.controller';
 import { UpdateUserDocumentsService } from './context/updateUserDocuments/updateUserDocuments.service';
 import { UserRepository } from './repository/user.repository';
@@ -29,12 +31,14 @@ import { UserDocumentsRepository } from './repository/userDocuments.repository';
     UpdateUserDocumentsController,
     GetUserIslandController,
     GetUserController,
+    UpdateUserController,
   ],
   providers: [
     GetUserDocumentsService,
     UpdateUserDocumentsService,
     GetUserIslandService,
     GetUserService,
+    UpdateUserService,
   ],
 })
 export class UsersModule {}
