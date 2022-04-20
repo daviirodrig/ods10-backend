@@ -30,6 +30,10 @@ export class Island {
   @JoinColumn()
   documents: Document[];
 
+  @Column({ default: 0 })
+  @Exclude()
+  ord: number;
+
   @CreateDateColumn({ name: 'created_at' })
   @Exclude()
   createdAt: Date;

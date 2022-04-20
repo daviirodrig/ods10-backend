@@ -16,7 +16,7 @@ export class GetUserIslandService {
     const islands = instanceToInstance(
       await this.islandRepo.find({
         relations: ['documents'],
-        order: { id: 'ASC' },
+        order: { ord: 'ASC' },
       }),
     );
 

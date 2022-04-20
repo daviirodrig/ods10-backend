@@ -11,7 +11,7 @@ export class GetIslandsService {
   async getIslands() {
     return this.islandRepo.find({
       relations: ['documents'],
-      order: { id: 'ASC' },
+      order: { ord: 'ASC' },
     });
   }
 }
