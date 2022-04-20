@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Island } from '@shared/entities/island.entity';
+import { instanceToInstance } from 'class-transformer';
 import { GetIslandsService } from './getIslands.service';
 
 @ApiTags('Islands')
@@ -11,6 +12,8 @@ export class GetIslandsController {
   @Get()
   @ApiOkResponse({ description: 'Success', type: Island, isArray: true })
   async getIslands() {
-    return await this.getIslandsService.getIslands();
+    const islands = await this.getIslandsService.getIslands();
+
+    return instanceToInstance(islands);
   }
 }

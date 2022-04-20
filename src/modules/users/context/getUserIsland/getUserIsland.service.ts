@@ -14,7 +14,10 @@ export class GetUserIslandService {
 
   async getUserIsland(userId: string) {
     const islands = instanceToInstance(
-      await this.islandRepo.find({ relations: ['documents'] }),
+      await this.islandRepo.find({
+        relations: ['documents'],
+        order: { id: 'ASC' },
+      }),
     );
 
     const userDocuments = instanceToInstance(
