@@ -14,8 +14,8 @@
 
 ## Deploy
 
-O deploy do backend foi feito com o [Heroku](https://www.heroku.com/) e está disponível [aqui](https://ods10-backend-develop.herokuapp.com/api/docs), com a documentção feita com [Swagger](https://swagger.io/).
+O deploy do backend foi feito com o [Heroku](https://www.heroku.com/) e está [disponível aqui](https://ods10-backend-develop.herokuapp.com/api/docs), com a documentção feita com [Swagger](https://swagger.io/).
 
 ## Diagrama do banco de dados
 
-![Diagrama do BD](https://raw.githubusercontent.com/daviirodrig/ods10-backend/develop/dbdiagram.png)
+[![https://dbdiagram.io/d/624358f6bed61838731fbe2e](https://raw.githubusercontent.com/daviirodrig/ods10-backend/develop/dbdiagram.png)](https://dbdiagram.io/d/624358f6bed61838731fbe2e)
